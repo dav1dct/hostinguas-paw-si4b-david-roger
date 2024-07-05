@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\BarangController;
 use App\Http\Controllers\API\PembayaranController;
-use App\Http\Controllers\API\PembeliController;
+use App\Http\Controllers\API\ReviewController;
 use App\Http\Controllers\API\PesananController;
 use App\Http\Controllers\API\AuthController;
 
@@ -18,10 +18,10 @@ Route::post('pembayaran', [PembayaranController::class, 'store']);
 Route::patch('pembayaran/{id}', [PembayaranController::class, 'update']);
 Route::delete('pembayaran/{id}', [PembayaranController::class, 'destroy']);
 
-Route::get('pembeli', [PembeliController::class, 'index']);
-Route::post('pembeli', [PembeliController::class, 'store']);
-Route::patch('pembeli/{id}', [PembeliController::class, 'update']);
-Route::delete('pembeli/{id}', [PembeliController::class, 'destroy']);
+Route::get('review', [ReviewController::class, 'index']);
+Route::post('review', [ReviewController::class, 'store']);
+Route::patch('review/{id}', [ReviewController::class, 'update']);
+Route::delete('review/{id}', [ReviewController::class, 'destroy']);
 
 Route::get('pesanan', [PesananController::class, 'index']);
 Route::post('pesanan', [PesananController::class, 'store']);

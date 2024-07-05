@@ -20,7 +20,6 @@
             <tr>
                 <th>ID</th>
                 <th>Pesanan</th>
-                <th>Jumlah</th>
                 <th>Harga</th>
                 <th>Bukti Pembayaran</th>
                 <th></th>
@@ -31,7 +30,6 @@
                 <tr>
                     <td>{{ $p->id }}</td>
                     <td>{{ $p->pesanan->pembeli->nama }} - {{ $p->pesanan->barang->nama }}</td>
-                    <td>{{ $p->jumlah }}</td>
                     <td>{{ $p->harga }}</td>
                     <td><img src="{{ url('images/'.$p["url_foto"])}}" style="width: 100px; height: auto;"></td>
                     <td>

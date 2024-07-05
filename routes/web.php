@@ -22,10 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 Route::resource('barang', BarangController::class);
 Route::resource('pembayaran', PembayaranController::class);
-Route::resource('pembeli', PembeliController::class);
 Route::resource('pesanan', PesananController::class);
+Route::resource('review', ReviewController::class);
 
 Route::post('/barang/store', [BarangController::class, 'store'])->name('barang.store');
 Route::put('/barang/{id}', [BarangController::class, 'update'])->name('barang.update');

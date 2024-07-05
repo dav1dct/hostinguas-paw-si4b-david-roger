@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
 use App\Models\Pesanan;
-use App\Models\Barang;
 use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
@@ -21,18 +20,25 @@ class PembayaranController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->user()->cannot('create', Pembayaran::class)) {
+            abort(403);
+        }
+
         $pesanan = Pesanan::with('pembeli')->get();
         return view('pembayaran.create', compact('pesanan'));
     }
-
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        if ($request->user()->cannot('create', Pembayaran::class)) {
+            abort(403);
+        }
+
         $imageName = time().'.'.$request->url_foto->extension();  
         $request->url_foto->move(public_path('images'), $imageName);
 
@@ -48,8 +54,12 @@ class PembayaranController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pembayaran $pembayaran)
+    public function edit(Request $request, Pembayaran $pembayaran)
     {
+        if ($request->user()->cannot('update', $pembayaran)) {
+            abort(403);
+        }
+
         $pesanan = Pesanan::all();
         return view('pembayaran.edit', compact('pembayaran', 'pesanan'));
     }
@@ -59,6 +69,10 @@ class PembayaranController extends Controller
      */
     public function update(Request $request, Pembayaran $pembayaran)
     {
+        if ($request->user()->cannot('update', $pembayaran)) {
+            abort(403);
+        }
+
         $request->validate([
             'pesanan_id' => 'required|exists:pesanans,id',
             'jumlah' => 'required|numeric',
@@ -73,11 +87,13 @@ class PembayaranController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pembayaran $pembayaran)
+    public function destroy(Request $request, Pembayaran $pembayaran)
     {
+        if ($request->user()->cannot('delete', $pembayaran)) {
+            abort(403);
+        }
+
         $pembayaran->delete();
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil dihapus.');
     }
 }
-
-

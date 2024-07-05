@@ -29,7 +29,7 @@ class PembayaranPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role === 'A' || $user->role === 'T';
     }
 
     /**

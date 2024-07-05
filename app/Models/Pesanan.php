@@ -10,15 +10,11 @@ class Pesanan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pembeli_id',
+        'nama',
         'barang_id',
         'tanggal_pesanan',
         'total_pesanan',
     ];
-    public function pembeli()
-    {
-        return $this->belongsTo(Pembeli::class);
-    }
     public function barang()
     {
         return $this->belongsTo(Barang::class);

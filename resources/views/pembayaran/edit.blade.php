@@ -14,18 +14,11 @@
                 <option value="">Pilih Pesanan</option>
                 @foreach ($pesanan as $p)
                     <option value="{{ $p->id }}" {{ $p->id == $pembayaran->pesanan_id ? 'selected' : '' }}>
-                        {{ $p->pembeli->nama }} - {{ $p->barang->nama }}
+                        {{ $p->barang->nama }}
                     </option>
                 @endforeach
             </select>
             @error('pesanan_id')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label for="jumlah" class="form-label">Jumlah</label>
-            <input type="number" name="jumlah" id="jumlah" class="form-control" value="{{ old('jumlah', $pembayaran->jumlah) }}">
-            @error('jumlah')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>

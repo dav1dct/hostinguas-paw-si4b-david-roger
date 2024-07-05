@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Pembeli</th>
+                <th>Nama Pembeli</th>
                 <th>Barang</th>
                 <th>Tanggal Pesanan</th>
                 <th>Total Pesanan</th>
@@ -21,7 +21,7 @@
             @foreach ($pesanan as $p)
                 <tr>
                     <td>{{ $p->id }}</td>
-                    <td>{{ $p->pembeli->nama }}</td>
+                    <td>{{ $p->nama }}</td>
                     <td>{{ $p->barang->nama }}</td>
                     <td>{{ $p->tanggal_pesanan }}</td>
                     <td>{{ $p->total_pesanan }}</td>

@@ -19,8 +19,12 @@ class BarangController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->user()->cannot('create', Barang::class)) {
+            abort(403);
+        }
+
         return view('barang.create');
     }
 
@@ -29,30 +33,31 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->user()->cannot('create', Barang::class)) {
+            abort(403);
+        }
+
         $request->validate([
             'nama' => 'required|max:255',
             'deskripsi' => 'nullable',
             'harga' => 'required|numeric',
             'stock' => 'required|numeric',
         ]);
-    
-        // Simpan data barang
+
         Barang::create([
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             'stock' => $request->stock,
         ]);
-    
-        // Redirect ke halaman index
+
         return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan');
     }
-    
 
     /**
      * Display the specified resource.
      */
-    public function show(barang $barang)
+    public function show(Barang $barang)
     {
         //
     }
@@ -60,8 +65,12 @@ class BarangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(barang $barang)
+    public function edit(Request $request, Barang $barang)
     {
+        if ($request->user()->cannot('update', $barang)) {
+            abort(403);
+        }
+
         return view('barang.edit', compact('barang'));
     }
 
@@ -70,30 +79,37 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $barang = Barang::findOrFail($id);
+        if ($request->user()->cannot('update', $barang)) {
+            abort(403);
+        }
+
         $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'harga' => 'required|numeric',
             'stock' => 'required|numeric',
         ]);
-    
-        $barang = Barang::findOrFail($id);
+
         $barang->update([
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             'stock' => $request->stock,
         ]);
-    
+
         return redirect()->route('barang.index')->with('success', 'Barang berhasil diupdate');
     }
-    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(barang $barang)
+    public function destroy(Request $request, Barang $barang)
     {
+        if ($request->user()->cannot('delete', $barang)) {
+            abort(403);
+        }
+
         $barang->delete();
         return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus.');
     }

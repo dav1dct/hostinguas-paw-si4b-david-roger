@@ -95,10 +95,10 @@
                     <use xlink:href="{{url('vendors/@coreui/icons/svg/free.svg#cil-bar-chart')}}"></use>
                 </svg> Pembayaran</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{{url('pembeli')}}">
+            <li class="nav-item"><a class="nav-link" href="{{url('review')}}">
                 <svg class="nav-icon">
                     <use xlink:href="{{url('vendors/@coreui/icons/svg/free.svg#cil-smile')}}"></use>
-                </svg> Pembeli</a>
+                </svg> Review Pembeli</a>
             </li>
         </ul>
     </div>
