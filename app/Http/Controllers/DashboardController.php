@@ -11,7 +11,8 @@ class DashboardController extends Controller
         $barang = Barang::all();
         $stokCategories = $barang->pluck('nama')->toArray();
         $stokBarangs = $barang->pluck('stock')->toArray();
-
+        
+        dd($stokBarangs);
         return view('dashboard.dashboard', compact('stokCategories', 'stokBarangs'));
     }
 }
